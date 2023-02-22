@@ -1,0 +1,56 @@
+﻿@model List<KutuphaneProject.Models.Entity.TBLYAZAR>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+<link href="~/Content/bootstrap.css" rel="stylesheet" />
+
+<link href="https://cdn.datatables.net/1.10.15/css/dataTables.bootstrap.min.css" rel="stylesheet" />
+<link href="https://cdn.datatables.net/responsive/2.1.1/css/responsive.bootstrap.min.css" rel="stylesheet" />
+
+<h2>Yazarlar</h2>
+
+<table id="tbl1" class="table table-striped">
+    <thead style="background-color:#05c7d4">
+        <tr>
+            <th>No</th>
+            <th>Ad</th>
+            <th>Soyad</th>
+            <th>Detay</th>
+            <th>Güncelle</th>
+            <th>Sil</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            i++;
+            <tr>
+                <td>@i</td>
+                <td>@item.Ad</td>
+                <td>@item.Soyad</td>
+                <td>@item.Detay</td>
+                <td>
+                    <a href="/Yazar/YazarGetir/@item.Id" class="btn btn-warning">Güncelle</a>
+                </td>
+                <td>
+                    <a href="/Yazar/YazarSil/@item.Id" onclick="return confirm('Silmek İstiyor Musunuz')" class="btn btn-danger">Sil</a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+<a href="/Yazar/YazarEkle" class="btn btn-primary">Yazar Ekle</a>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+
+<script src="https://cdn.datatables.net/1.10.15/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.10.15/js/dataTables.bootstrap4.min.js "></script>
+
+<script type="text/javascript">
+    $(document).ready(function () {
+        $('#tbl1').dataTable({});
+    });
+</script>

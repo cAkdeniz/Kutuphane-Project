@@ -1,0 +1,27 @@
+﻿@model KutuphaneProject.Models.Entity.TBLMESAJ
+@{
+    ViewBag.Title = "YeniMesaj";
+    Layout = "~/Views/Shared/_OgrenciLayout.cshtml";
+}
+
+<h2>Yeni Mesaj</h2>
+
+<form class="form-group" method="post">
+    <div></div>
+    <div style="padding-top:15px">
+        <label>Alıcı Kullanıcı Adı:</label>
+        @Html.TextBoxFor(x => x.Alici, new { @class = "form-control" })
+    </div>
+    <div style="padding-top:15px">
+        <label>Konu:</label>
+        @Html.TextBoxFor(x => x.Konu, new { @class = "form-control" })
+    </div>
+    <div style="padding-top:15px">
+        <label>Detay:</label>
+        @Html.TextAreaFor(x => x.Detay, new { @class = "form-control" })
+    </div>
+    <div style="padding-top:15px">
+        <button type="submit" class="btn btn-info">Mesajı Gönder</button>
+    </div>
+</form>
+

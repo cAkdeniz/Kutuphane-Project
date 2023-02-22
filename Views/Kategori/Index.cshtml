@@ -1,0 +1,32 @@
+﻿@model List<KutuphaneProject.Models.Entity.TBLKATEGORI>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+<h2>Kategoriler</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>No</th>
+        <th>Kategori Adı</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td>@i</td>
+            <td>@item.Ad</td>
+            <td>
+                <a href="/Kategori/KategoriGetir/@item.Id" class="btn btn-warning">Güncelle</a>
+            </td>
+            <td>
+                <a href="/Kategori/KategoriSil/@item.Id" class="btn btn-danger">Sil</a>
+            </td>
+        </tr>
+    }
+</table>
+<a href="/Kategori/KategoriEkle" class="btn btn-primary">Kategori Ekle</a>

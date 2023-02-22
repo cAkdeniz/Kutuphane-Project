@@ -1,0 +1,39 @@
+﻿@model KutuphaneProject.Models.Entity.TBLKITAP
+@{
+    ViewBag.Title = "KitapGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("KitapGuncelle", "Kitap", FormMethod.Post))
+{
+    <div style="margin-top:25px"></div>
+    <div style="margin-top:15px">
+        @Html.HiddenFor(x=>x.Id)
+        <label>Kitap Adı: </label>
+        @Html.TextBoxFor(x => x.Ad, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Kategori: </label>
+        @Html.DropDownListFor(x => x.KategoriId, (List<SelectListItem>)ViewBag.Kategori, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Yazar: </label>
+        @Html.DropDownListFor(x => x.YazarId, (List<SelectListItem>)ViewBag.Yazar, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Basım Yılı: </label>
+        @Html.TextBoxFor(x => x.BasımYil, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Yayın Evi: </label>
+        @Html.TextBoxFor(x => x.YayinEvi, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Sayfa Sayısı: </label>
+        @Html.TextBoxFor(x => x.Sayfa, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-warning">Güncelle</button>
+    </div>
+}
+

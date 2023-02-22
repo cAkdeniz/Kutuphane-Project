@@ -1,0 +1,20 @@
+﻿@model KutuphaneProject.Models.Entity.TBLPERSONEL
+@{
+    ViewBag.Title = "PersonelGetir";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("PersonelGuncelle", "Personel", FormMethod.Post))
+{
+    <div style="margin-top:25px"></div>
+    <div style="margin-top:15px">
+        @Html.HiddenFor(x=>x.Id)
+        <label>Personel Adı Soyadı: </label>
+        @Html.ValidationMessageFor(x => x.Personel, "", new { @style = "color:red" })
+        @Html.TextBoxFor(x => x.Personel, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <button class="btn btn-warning">Güncelle</button>
+    </div>
+}
+

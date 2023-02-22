@@ -1,0 +1,50 @@
+﻿@model KutuphaneProject.Models.Entity.TBLHAREKET
+@{
+    ViewBag.Title = "OduncIade";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+@using (Html.BeginForm("OduncGuncelle", "Odunc", FormMethod.Post))
+{
+    <div style="margin-top:25px"></div>
+    <div style="margin-top:15px">
+        @Html.HiddenFor(x => x.Id)
+        <label>Kitap Adı: </label>
+        @Html.HiddenFor(x => x.KitapId)
+        @Html.TextBoxFor(x => x.TBLKITAP.Ad, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Üye Adı: </label>
+        @Html.HiddenFor(x => x.UyeId)
+        @Html.TextBoxFor(x => x.TBLUYELER.Ad, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Üye Soyadı: </label>
+        @Html.TextBoxFor(x => x.TBLUYELER.Soyad, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Personel: </label>
+        @Html.HiddenFor(x => x.PersonelId)
+        @Html.TextBoxFor(x => x.TBLPERSONEL.Personel, new { @class = "form-control" })
+    </div>
+    <div style="margin-top:15px">
+        <label>Alış Tarihi: </label>
+        <input type="text" name="AlisTarih" class="form-control" value="@Convert.ToDateTime(Model.AlisTarih).ToString("dd/MM/yyyy")" />
+    </div>
+    <div style="margin-top:15px">
+        <label>İade Tarihi: </label>
+        <input type="text" name="IadeTarih" class="form-control" value="@Convert.ToDateTime(Model.IadeTarih).ToString("dd/MM/yyyy")" />
+    </div>
+    <div style="margin-top:15px">
+        <label>Getirilen Iade Tarihi: </label>
+        <input type="text" class="form-control" name="GetirilenTarih" value="@DateTime.Now.ToShortDateString()" />
+    </div>
+    <div style="margin-top:15px">
+        <label>Geç kalınan Gün Sayısı: </label>
+        <input type="text" class="form-control" name="gec" value="@ViewBag.dgr" />
+    </div>
+    <div style="margin-top:15px">
+        <button style="background-color:#a330b5;color:white" class="btn btn-group">Ödünç Kitabı Geri Al</button>
+    </div>
+}
+

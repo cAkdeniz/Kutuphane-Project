@@ -1,0 +1,33 @@
+﻿@model List<KutuphaneProject.Models.Entity.TBLPERSONEL>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+    int i = 0;
+}
+
+<h2>Personel Listesi</h2>
+
+<table class="table table-bordered">
+    <tr>
+        <th>No</th>
+        <th>Personel</th>
+        <th>Sil</th>
+        <th>Güncelle</th>
+    </tr>
+    @foreach (var item in Model)
+    {
+        i++;
+        <tr>
+            <td>@i</td>
+            <td>@item.Personel</td>
+            <td>
+                <a href="/Personel/PersonelGetir/@item.Id" class="btn btn-warning">Güncelle</a>
+            </td>
+            <td>
+                <a href="/Personel/PersonelSil/@item.Id" onclick="return confirm('Silmek İstiyor Musunuz')" class="btn btn-danger">Sil</a>
+            </td>
+        </tr>
+    }
+</table>
+<a href="/Personel/PersonelEkle" class="btn btn-primary">Personel Ekle</a>
+

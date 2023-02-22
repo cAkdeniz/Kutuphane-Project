@@ -1,0 +1,266 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="KutuphaneDBModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="TBLCEZALAR">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="UyeId" Type="Int32" />
+    <Property Name="HareketId" Type="Int32" />
+    <Property Name="Baslangic" Type="DateTime" Precision="0" />
+    <Property Name="Bitis" Type="DateTime" Precision="0" />
+    <Property Name="Para" Type="Decimal" Precision="18" Scale="2" />
+    <NavigationProperty Name="TBLHAREKET" Relationship="Self.FK_TBLCEZALAR_TBLHAREKET" FromRole="TBLCEZALAR" ToRole="TBLHAREKET" />
+    <NavigationProperty Name="TBLUYELER" Relationship="Self.FK_TBLCEZALAR_TBLUYELER" FromRole="TBLCEZALAR" ToRole="TBLUYELER" />
+  </EntityType>
+  <EntityType Name="TBLHAREKET">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="KitapId" Type="Int32" />
+    <Property Name="UyeId" Type="Int32" />
+    <Property Name="PersonelId" Type="Int32" />
+    <Property Name="AlisTarih" Type="DateTime" Precision="0" />
+    <Property Name="IadeTarih" Type="DateTime" Precision="0" />
+    <NavigationProperty Name="TBLCEZALAR" Relationship="Self.FK_TBLCEZALAR_TBLHAREKET" FromRole="TBLHAREKET" ToRole="TBLCEZALAR" />
+    <NavigationProperty Name="TBLKITAP" Relationship="Self.FK_TBLHAREKET_TBLKITAP" FromRole="TBLHAREKET" ToRole="TBLKITAP" />
+    <NavigationProperty Name="TBLPERSONEL" Relationship="Self.FK_TBLHAREKET_TBLPERSONEL" FromRole="TBLHAREKET" ToRole="TBLPERSONEL" />
+    <NavigationProperty Name="TBLUYELER" Relationship="Self.FK_TBLHAREKET_TBLUYELER" FromRole="TBLHAREKET" ToRole="TBLUYELER" />
+    <Property Name="GetirilenTarih" Type="DateTime" Precision="0" />
+    <Property Name="IslemDurum" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TBLKATEGORI">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="40" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TBLKITAP" Relationship="Self.FK_TBLKITAP_TBLKATEGORI" FromRole="TBLKATEGORI" ToRole="TBLKITAP" />
+    <Property Name="Durum" Type="Boolean" />
+  </EntityType>
+  <EntityType Name="TBLKITAP">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="BasımYil" Type="String" MaxLength="4" FixedLength="true" Unicode="false" />
+    <Property Name="YayinEvi" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Sayfa" Type="String" MaxLength="4" FixedLength="false" Unicode="true" />
+    <Property Name="Durum" Type="Boolean" />
+    <Property Name="KategoriId" Type="Int32" />
+    <Property Name="YazarId" Type="Int32" />
+    <NavigationProperty Name="TBLHAREKET" Relationship="Self.FK_TBLHAREKET_TBLKITAP" FromRole="TBLKITAP" ToRole="TBLHAREKET" />
+    <NavigationProperty Name="TBLKATEGORI" Relationship="Self.FK_TBLKITAP_TBLKATEGORI" FromRole="TBLKITAP" ToRole="TBLKATEGORI" />
+    <NavigationProperty Name="TBLYAZAR" Relationship="Self.FK_TBLKITAP_TBLYAZAR" FromRole="TBLKITAP" ToRole="TBLYAZAR" />
+    <Property Name="Resim" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TBLPERSONEL">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Personel" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TBLHAREKET" Relationship="Self.FK_TBLHAREKET_TBLPERSONEL" FromRole="TBLPERSONEL" ToRole="TBLHAREKET" />
+  </EntityType>
+  <EntityType Name="TBLUYELER">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Email" Type="String" MaxLength="70" FixedLength="false" Unicode="true" />
+    <Property Name="KullaniciAd" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Sifre" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Fotograf" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
+    <Property Name="Telefon" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Okul" Type="String" MaxLength="100" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TBLCEZALAR" Relationship="Self.FK_TBLCEZALAR_TBLUYELER" FromRole="TBLUYELER" ToRole="TBLCEZALAR" />
+    <NavigationProperty Name="TBLHAREKET" Relationship="Self.FK_TBLHAREKET_TBLUYELER" FromRole="TBLUYELER" ToRole="TBLHAREKET" />
+  </EntityType>
+  <EntityType Name="TBLYAZAR">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="true" />
+    <Property Name="Soyad" Type="String" MaxLength="30" FixedLength="false" Unicode="true" />
+    <Property Name="Detay" Type="String" MaxLength="1000" FixedLength="false" Unicode="true" />
+    <NavigationProperty Name="TBLKITAP" Relationship="Self.FK_TBLKITAP_TBLYAZAR" FromRole="TBLYAZAR" ToRole="TBLKITAP" />
+  </EntityType>
+  <Association Name="FK_TBLCEZALAR_TBLHAREKET">
+    <End Role="TBLHAREKET" Type="Self.TBLHAREKET" Multiplicity="0..1" />
+    <End Role="TBLCEZALAR" Type="Self.TBLCEZALAR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLHAREKET">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TBLCEZALAR">
+        <PropertyRef Name="HareketId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLCEZALAR_TBLUYELER">
+    <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="0..1" />
+    <End Role="TBLCEZALAR" Type="Self.TBLCEZALAR" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLUYELER">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TBLCEZALAR">
+        <PropertyRef Name="UyeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLHAREKET_TBLKITAP">
+    <End Role="TBLKITAP" Type="Self.TBLKITAP" Multiplicity="0..1" />
+    <End Role="TBLHAREKET" Type="Self.TBLHAREKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLKITAP">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TBLHAREKET">
+        <PropertyRef Name="KitapId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLHAREKET_TBLPERSONEL">
+    <End Role="TBLPERSONEL" Type="Self.TBLPERSONEL" Multiplicity="0..1" />
+    <End Role="TBLHAREKET" Type="Self.TBLHAREKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLPERSONEL">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TBLHAREKET">
+        <PropertyRef Name="PersonelId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLHAREKET_TBLUYELER">
+    <End Role="TBLUYELER" Type="Self.TBLUYELER" Multiplicity="0..1" />
+    <End Role="TBLHAREKET" Type="Self.TBLHAREKET" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLUYELER">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TBLHAREKET">
+        <PropertyRef Name="UyeId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLKITAP_TBLKATEGORI">
+    <End Role="TBLKATEGORI" Type="Self.TBLKATEGORI" Multiplicity="0..1" />
+    <End Role="TBLKITAP" Type="Self.TBLKITAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLKATEGORI">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TBLKITAP">
+        <PropertyRef Name="KategoriId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="FK_TBLKITAP_TBLYAZAR">
+    <End Role="TBLYAZAR" Type="Self.TBLYAZAR" Multiplicity="0..1" />
+    <End Role="TBLKITAP" Type="Self.TBLKITAP" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="TBLYAZAR">
+        <PropertyRef Name="Id" />
+      </Principal>
+      <Dependent Role="TBLKITAP">
+        <PropertyRef Name="YazarId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="KutuphaneDBEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+    <EntitySet Name="TBLCEZALAR" EntityType="Self.TBLCEZALAR" />
+    <EntitySet Name="TBLHAREKET" EntityType="Self.TBLHAREKET" />
+    <EntitySet Name="TBLKATEGORI" EntityType="Self.TBLKATEGORI" />
+    <EntitySet Name="TBLKITAP" EntityType="Self.TBLKITAP" />
+    <EntitySet Name="TBLPERSONEL" EntityType="Self.TBLPERSONEL" />
+    <EntitySet Name="TBLUYELER" EntityType="Self.TBLUYELER" />
+    <EntitySet Name="TBLYAZAR" EntityType="Self.TBLYAZAR" />
+    <AssociationSet Name="FK_TBLCEZALAR_TBLHAREKET" Association="Self.FK_TBLCEZALAR_TBLHAREKET">
+      <End Role="TBLHAREKET" EntitySet="TBLHAREKET" />
+      <End Role="TBLCEZALAR" EntitySet="TBLCEZALAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLCEZALAR_TBLUYELER" Association="Self.FK_TBLCEZALAR_TBLUYELER">
+      <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+      <End Role="TBLCEZALAR" EntitySet="TBLCEZALAR" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLHAREKET_TBLKITAP" Association="Self.FK_TBLHAREKET_TBLKITAP">
+      <End Role="TBLKITAP" EntitySet="TBLKITAP" />
+      <End Role="TBLHAREKET" EntitySet="TBLHAREKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLHAREKET_TBLPERSONEL" Association="Self.FK_TBLHAREKET_TBLPERSONEL">
+      <End Role="TBLPERSONEL" EntitySet="TBLPERSONEL" />
+      <End Role="TBLHAREKET" EntitySet="TBLHAREKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLHAREKET_TBLUYELER" Association="Self.FK_TBLHAREKET_TBLUYELER">
+      <End Role="TBLUYELER" EntitySet="TBLUYELER" />
+      <End Role="TBLHAREKET" EntitySet="TBLHAREKET" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLKITAP_TBLKATEGORI" Association="Self.FK_TBLKITAP_TBLKATEGORI">
+      <End Role="TBLKATEGORI" EntitySet="TBLKATEGORI" />
+      <End Role="TBLKITAP" EntitySet="TBLKITAP" />
+    </AssociationSet>
+    <AssociationSet Name="FK_TBLKITAP_TBLYAZAR" Association="Self.FK_TBLKITAP_TBLYAZAR">
+      <End Role="TBLYAZAR" EntitySet="TBLYAZAR" />
+      <End Role="TBLKITAP" EntitySet="TBLKITAP" />
+    </AssociationSet>
+    <EntitySet Name="TBLHAKKIMIZDA" EntityType="KutuphaneDBModel.TBLHAKKIMIZDA" />
+    <EntitySet Name="TBLILETISIM" EntityType="KutuphaneDBModel.TBLILETISIM" />
+    <EntitySet Name="TBLMESAJ" EntityType="KutuphaneDBModel.TBLMESAJ" />
+    <EntitySet Name="TBLDUYURULAR" EntityType="KutuphaneDBModel.TBLDUYURULAR" />
+  </EntityContainer>
+  <EntityType Name="TBLHAKKIMIZDA">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Aciklama" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TBLILETISIM">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Ad" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Mail" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Konu" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="Mesaj" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="TBLMESAJ">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Gonderen" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Alici" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Konu" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="Detay" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="TBLDUYURULAR">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="Kategori" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Name="Icerik" Type="String" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="Tarih" Type="DateTime" Precision="0" />
+  </EntityType>
+</Schema>
